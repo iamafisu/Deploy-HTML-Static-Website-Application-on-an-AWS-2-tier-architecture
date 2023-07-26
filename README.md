@@ -13,10 +13,15 @@ Before running this script, you need the following resources setup and running:
 
 1. VPC and attach an Internet Gateway
 2. 1 Public and 1 Private Subnet in 2 Availability Zones
-3. Route Tables
-4. Security Groups to allow HTTP, HTTPS and SSH connections.
-5. AWS EC2 instance running with Amazon Linux 2 in the private subnet in both AZ.
-2. Create a GitHub repo and uploaded your webfiles.
+3. Create a NAT-Gateway in the public subnet in each AZ.
+3. Create Route Tables to direct traffic to internet from both the public and private subnet.
+4. Create 3 Security Groups - Webserver_sg, SSH_sg and ALB_sg.
+5. AWS EC2 instance running with Amazon Linux 2 in the private subnet in both AZ and the attach the Webserver_sg.
+6. Create a Target Group and add the EC2 instances.
+7. Create an Application Load Balancer (ALB) and point it to the Target Group.
+8. Register or use an existing domain name in Route 53 and point it to the ALB DNS Name.
+9. Request for SSL certificate from the Certificate Manager to secure communication to the website.
+10. Done, Enjoy 
 
 ## Installation and Usage
 
@@ -54,7 +59,7 @@ Before running this script, you need the following resources setup and running:
 
 4. Download the web application files from the specified GitHub repository:
    ```bash
-   wget https://github.com/iamafisu/mole/archive/refs/heads/main.zip
+   wget https://github.com/iamafisu/xmen-webfiles/archive/refs/heads/main.zip
    ```
 
 5. Unzip the web application files:
@@ -64,12 +69,12 @@ Before running this script, you need the following resources setup and running:
 
 6. Move the web application files to the web root directory:
    ```bash
-   cp -r mole-main/* /var/www/html/
+   cp -r xmen-webfiles-main/xmen-main/* /var/www/html/
    ```
 
 7. Clean up - remove unnecessary files and directories:
    ```bash
-   rm -rf mole-main main.zip
+   rm -rf xmen-webfiles-main main.zip
    ```
 
 8. Enable the httpd service to start on boot:
@@ -84,7 +89,7 @@ Before running this script, you need the following resources setup and running:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 ```
 
-Replace `[iamafisu]` and `[Deploy-HTML-Website-on-AWS]` in the script download link with your actual GitHub username and repository name. Additionally, customize the README with any specific instructions or explanations related to your script.
+For any questions or inquiries, please contact afisu.g@hotmail.com. Happy coding!
